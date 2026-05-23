@@ -305,12 +305,12 @@
   .modal{position:fixed;inset:0;background:rgba(20,21,30,.45);z-index:90;
     display:none;align-items:flex-end;justify-content:center;}
   .modal.show{display:flex;}
-  .sheet{background:#fff;width:100%;max-width:480px;max-height:94vh;
+  .sheet{background:#fff;width:100%;max-width:480px;max-height:94vh;max-height:94dvh;
     border-radius:22px 22px 0 0;display:flex;flex-direction:column;
     overflow:hidden;animation:sheetUp .4s cubic-bezier(.22,.61,.36,1);}
   @keyframes sheetUp{from{transform:translateY(60px);opacity:.6;}to{transform:translateY(0);opacity:1;}}
   @media(min-width:520px){.modal{align-items:center;}
-    .sheet{border-radius:22px;max-height:90vh;}}
+    .sheet{border-radius:22px;max-height:90vh;max-height:90dvh;}}
 
   .m-top{padding:18px 22px;display:flex;align-items:center;gap:14px;
     border-bottom:1px solid var(--line);}
@@ -322,7 +322,7 @@
     transition:width .45s cubic-bezier(.22,.61,.36,1);}
   .m-step{font-size:12.5px;color:var(--text-faint);font-variant-numeric:tabular-nums;
     font-weight:600;}
-  .m-body{flex:1;overflow-y:auto;padding:32px 26px 26px;}
+  .m-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 26px 26px;}
 
   .q-slide{display:none;}
   .q-slide.active{display:block;animation:slideIn .42s cubic-bezier(.22,.61,.36,1);}
@@ -351,7 +351,7 @@
 
   .loading{display:none;flex-direction:column;align-items:center;justify-content:center;
     padding:70px 40px;text-align:center;}
-  .loading.show{display:flex;}
+  .loading.show{display:flex;flex:1;}
   .spinner{width:56px;height:56px;border-radius:50%;border:3px solid var(--surface-2);
     border-top-color:var(--accent);animation:spin .8s linear infinite;margin-bottom:26px;}
   @keyframes spin{to{transform:rotate(360deg);}}
@@ -360,42 +360,47 @@
   .load-sub{font-size:13px;color:var(--text-faint);margin-top:9px;}
 
   .result{display:none;}
-  .result.show{display:block;animation:fadeUp .6s ease;}
+  .result.show{display:flex;flex-direction:column;flex:1;overflow:hidden;animation:fadeUp .6s ease;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-  .r-head{padding:32px 26px 24px;text-align:center;background:var(--accent-wash);}
-  .r-head .done{font-size:12.5px;color:var(--good);font-weight:700;
-    letter-spacing:.04em;margin-bottom:11px;}
-  .r-head h3{font-size:22px;font-weight:800;letter-spacing:-.02em;}
-  .r-head .meta{font-size:12px;color:var(--text-faint);margin-top:9px;
+  .result-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .r-topbar{display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;border-bottom:1px solid var(--line);background:#fff;flex-shrink:0;}
+  .r-topbar-title{font-size:13.5px;font-weight:700;color:var(--text);}
+  .r-close{background:var(--surface-2);border:none;width:30px;height:30px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;color:var(--text-dim);cursor:pointer;padding:0;flex-shrink:0;}
+  .r-head{padding:24px 24px 20px;text-align:center;
+    background:linear-gradient(160deg,#EDEAFD 0%,#F6F5FF 100%);}
+  .r-head .done{font-size:12px;color:var(--good);font-weight:700;
+    letter-spacing:.05em;margin-bottom:10px;}
+  .r-head h3{font-size:21px;font-weight:800;letter-spacing:-.02em;}
+  .r-head .meta{font-size:11.5px;color:var(--text-faint);margin-top:7px;
     font-variant-numeric:tabular-nums;}
-  .r-summary{margin:22px 26px 0;padding:22px;border-radius:15px;
+  .r-summary{margin:18px 20px 0;padding:20px;border-radius:15px;
     border:1.5px solid var(--accent);background:var(--accent-wash);}
-  .r-summary .lbl{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:11px;}
-  .gauge{height:9px;background:#fff;border-radius:100px;overflow:hidden;margin:9px 0 7px;}
+  .r-summary .lbl{font-size:11.5px;color:var(--accent);font-weight:700;margin-bottom:10px;}
+  .gauge{height:9px;background:rgba(255,255,255,.7);border-radius:100px;overflow:hidden;margin:9px 0 7px;}
   .gauge .fill{height:100%;border-radius:100px;
     background:linear-gradient(90deg,var(--accent),var(--accent-soft));width:0;
     transition:width 1.1s cubic-bezier(.22,.61,.36,1);}
   .r-summary .big{font-size:16px;font-weight:700;margin-top:5px;}
   .r-summary .big b{color:var(--accent);}
-  .r-summary .verdict{font-size:13.5px;color:var(--text-dim);margin-top:9px;line-height:1.6;}
-  .locked-wrap{margin:24px 26px 0;position:relative;}
-  .locked-title{font-size:13.5px;font-weight:700;color:var(--text-faint);
-    margin-bottom:14px;display:flex;align-items:center;gap:7px;}
-  .lrow{border:1px solid var(--line);border-radius:13px;padding:17px;
-    margin-bottom:11px;background:#fff;filter:blur(5px);user-select:none;}
-  .lrow h4{font-size:14.5px;font-weight:700;margin-bottom:6px;}
-  .lrow p{font-size:13px;color:var(--text-dim);}
-  .lock-veil{position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:flex-end;
-    background:linear-gradient(transparent,#fff 64%);padding-bottom:6px;}
-  .lock-pill{display:flex;align-items:center;gap:7px;font-size:13px;
-    font-weight:700;color:var(--text);background:#fff;
-    border:1px solid var(--line);border-radius:100px;padding:10px 18px;
-    box-shadow:0 6px 18px rgba(20,21,30,.10);}
+  .r-summary .verdict{font-size:13px;color:var(--text-dim);margin-top:9px;line-height:1.6;}
+  .locked-wrap{margin:18px 20px 0;position:relative;}
+  .locked-title{font-size:13px;font-weight:700;color:var(--text-dim);
+    margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+  .lrow{border:1px solid var(--line);border-radius:13px;padding:16px;
+    margin-bottom:10px;background:#fff;filter:blur(4px);user-select:none;pointer-events:none;}
+  .lrow h4{font-size:14px;font-weight:700;margin-bottom:5px;}
+  .lrow p{font-size:12.5px;color:var(--text-dim);}
+  .lock-veil{position:absolute;inset:0;
+    background:linear-gradient(to bottom,transparent 15%,rgba(255,255,255,.92) 55%,#fff 80%);
+    pointer-events:none;}
+  .lock-pill{display:none;}
 
   .reserve{display:none;}
-  .reserve.show{display:block;animation:fadeUp .5s ease;}
-  .reserve-in{padding:30px 26px 26px;}
+  .reserve.show{display:flex;flex-direction:column;flex:1;overflow:hidden;animation:fadeUp .5s ease;}
+  .reserve-in{padding:30px 26px 26px;overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;}
   .r-badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;
     font-weight:700;color:#fff;background:var(--accent);
     border-radius:100px;padding:8px 16px;margin-bottom:18px;}
@@ -415,17 +420,40 @@
   .reserve .field{margin-bottom:11px;}
   .reserve .rfine{font-size:11.5px;color:var(--text-faint);margin-top:13px;text-align:center;}
 
-  .cta-zone{margin:16px 26px 30px;padding:26px 22px;border-radius:16px;
-    border:1px solid var(--line);background:var(--bg-soft);text-align:center;}
-  .cta-zone .sale-badge{margin-bottom:14px;}
-  .cta-zone h3{font-size:18px;font-weight:800;letter-spacing:-.01em;}
-  .cta-zone p{font-size:13px;color:var(--text-dim);margin:9px 0 18px;line-height:1.6;}
-  .cta-zone .field{margin-bottom:11px;}
-  .cta-fine{font-size:11.5px;color:var(--text-faint);margin-top:13px;}
+  .cta-zone{padding:20px 20px 36px;text-align:center;}
+  .cta-unlock-card{background:linear-gradient(135deg,var(--accent) 0%,#7B6AF5 100%);
+    border-radius:16px;padding:20px;margin-bottom:18px;color:#fff;}
+  .cta-unlock-card .cul{font-size:11px;font-weight:800;letter-spacing:.1em;
+    opacity:.85;margin-bottom:8px;}
+  .cta-unlock-card h3{font-size:17px;font-weight:800;line-height:1.45;letter-spacing:-.01em;}
+  .cta-social{display:flex;align-items:center;justify-content:center;gap:9px;
+    font-size:12.5px;color:var(--text-dim);margin:0 0 14px;}
+  .cta-avatars{display:flex;}
+  .cta-avatars i{width:22px;height:22px;border-radius:50%;border:2.5px solid #fff;
+    margin-left:-7px;display:block;flex-shrink:0;}
+  .cta-avatars i:first-child{margin-left:0;background:linear-gradient(135deg,#C9C0F8,#8B7BF5);}
+  .cta-avatars i:nth-child(2){background:linear-gradient(135deg,#F8D0C0,#F5977B);}
+  .cta-avatars i:nth-child(3){background:linear-gradient(135deg,#C0E8F8,#7BC5F5);}
+  .cta-avatars i:nth-child(4){background:linear-gradient(135deg,#D0F8C0,#97F57B);}
+  .price-strip{display:flex;align-items:center;justify-content:center;gap:11px;
+    margin:0 0 12px;padding:14px;border-radius:13px;
+    background:var(--accent-wash);border:1px solid rgba(91,71,224,.15);}
+  .price-strip .was{font-size:15px;color:var(--text-faint);text-decoration:line-through;}
+  .price-strip .now{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-.02em;}
+  .price-strip .disc{font-size:11px;font-weight:800;color:#fff;background:var(--accent);
+    border-radius:6px;padding:3px 8px;}
+  .cta-mini-timer{font-size:12px;color:var(--warn);font-weight:700;
+    display:flex;align-items:center;justify-content:center;gap:5px;
+    margin-bottom:14px;padding:10px;border-radius:9px;
+    background:rgba(217,138,31,.07);border:1px solid rgba(217,138,31,.2);}
+  .cta-zone .field{margin-bottom:10px;}
+  .cta-perks{display:flex;justify-content:center;gap:14px;margin-top:10px;flex-wrap:wrap;}
+  .cta-perks span{font-size:11px;color:var(--text-dim);}
+  .cta-fine{font-size:11px;color:var(--text-faint);margin-top:10px;line-height:1.5;}
 
   .thanks{display:none;flex-direction:column;align-items:center;justify-content:center;
     padding:60px 32px;text-align:center;}
-  .thanks.show{display:flex;animation:fadeUp .55s ease;}
+  .thanks.show{display:flex;flex:1;animation:fadeUp .55s ease;}
   .thanks .mark{width:68px;height:68px;border-radius:50%;background:rgba(31,165,114,.12);
     border:1.5px solid var(--good);display:flex;align-items:center;justify-content:center;
     font-size:32px;color:var(--good);margin-bottom:24px;}
@@ -924,35 +952,55 @@
       <div class="load-sub">잠시만 기다려 주세요</div>
     </div>
 
-    <div class="result" id="result">
-      <div class="r-head">
-        <div class="done">● 분석 완료</div>
-        <h3>TIKI 관계 분석 리포트</h3>
-        <div class="meta">리포트 #2026A</div>
+    <div class=”result” id=”result”>
+      <div class=”r-topbar”>
+        <div class=”r-topbar-title”>TIKI 관계 분석 리포트</div>
+        <button class=”r-close” onclick=”closeModal()”>✕</button>
       </div>
-      <div class="r-summary">
-        <div class="lbl">핵심 진단 — 현재 그녀의 호감도</div>
-        <div class="gauge"><div class="fill" id="gaugeFill"></div></div>
-        <div class="big">호감도 <b id="scoreNum">0</b><b>%</b></div>
-        <div class="verdict">“관심은 분명히 있으나, 아직 확신은 없는 단계”입니다. 지금의 7일이 두 사람의 방향을 결정합니다.</div>
-      </div>
-      <div class="locked-wrap">
-        <div class="locked-title">🔒 전체 리포트에 포함된 내용</div>
-        <div class="lrow"><h4>그녀의 심리 프로파일 상세</h4><p>감정 표현 빈도 82%, 진지함 수용도 28% — 어떤 톤이 부담이 되는지 정밀 분석합니다.</p></div>
-        <div class="lrow"><h4>당신의 말투 진단</h4><p>메시지 길이, 물음표 빈도, 답장 속도 — 상대가 느끼는 부담 신호를 짚어냅니다.</p></div>
-        <div class="lrow"><h4>다음 7일 액션 플랜</h4><p>날짜별로 무엇을, 어떤 톤으로 해야 하는지 구체적으로 안내합니다.</p></div>
-        <div class="lrow"><h4>다음 답장 추천 3가지</h4><p>지금 상황에 맞는 실제 답장 문장을 톤별로 제안합니다.</p></div>
-        <div class="lock-veil">
-          <div class="lock-pill">🔒 전체 리포트는 정식 출시 후 공개됩니다</div>
+      <div class=”result-scroll”>
+        <div class=”r-head”>
+          <div class=”done”>● 분석 완료</div>
+          <h3>TIKI 관계 분석 리포트</h3>
+          <div class=”meta”>리포트 #2026A</div>
         </div>
-      </div>
-      <div class="cta-zone">
-        <div class="sale-badge"><span class="pct">50%</span> 오늘 자정까지 한정</div>
-        <h3>전체 리포트, 반값으로 받아보세요</h3>
-        <p>출시가 9,900원 → <b style="color:var(--text);">오늘 신청가 4,900원</b><br>예약은 무료이며 지금 결제하지 않습니다.</p>
-        <input class="field" type="email" id="emailInput" placeholder="이메일 주소" oninput="checkEmail()">
-        <button class="btn block" id="submitBtn" onclick="submitForm()" disabled style="opacity:.4;">반값으로 미리 신청하기</button>
-        <div class="cta-fine">출시 시 입력하신 이메일로 안내드립니다. 언제든 취소 가능.</div>
+        <div class=”r-summary”>
+          <div class=”lbl”>핵심 진단 — 현재 그녀의 호감도</div>
+          <div class=”gauge”><div class=”fill” id=”gaugeFill”></div></div>
+          <div class=”big”>호감도 <b id=”scoreNum”>0</b><b>%</b></div>
+          <div class=”verdict”>”관심은 분명히 있으나, 아직 확신은 없는 단계”입니다. 지금의 7일이 두 사람의 방향을 결정합니다.</div>
+        </div>
+        <div class=”locked-wrap”>
+          <div class=”locked-title”>🔒 전체 리포트에 포함된 내용</div>
+          <div class=”lrow”><h4>그녀의 심리 프로파일 상세</h4><p>감정 표현 빈도 82%, 진지함 수용도 28% — 어떤 톤이 부담이 되는지 정밀 분석합니다.</p></div>
+          <div class=”lrow”><h4>당신의 말투 진단</h4><p>메시지 길이, 물음표 빈도, 답장 속도 — 상대가 느끼는 부담 신호를 짚어냅니다.</p></div>
+          <div class=”lrow”><h4>다음 7일 액션 플랜</h4><p>날짜별로 무엇을, 어떤 톤으로 해야 하는지 구체적으로 안내합니다.</p></div>
+          <div class=”lrow”><h4>다음 답장 추천 3가지</h4><p>지금 상황에 맞는 실제 답장 문장을 톤별로 제안합니다.</p></div>
+          <div class=”lock-veil”></div>
+        </div>
+        <div class=”cta-zone”>
+          <div class=”cta-unlock-card”>
+            <div class=”cul”>🔓 전체 리포트 잠금 해제</div>
+            <h3>지금 예약하면, 출시 즉시<br>4가지 전체 분석을 받아요</h3>
+          </div>
+          <div class=”cta-social”>
+            <div class=”cta-avatars”><i></i><i></i><i></i><i></i></div>
+            <span>이미 <b>3,452명</b>이 예약 완료</span>
+          </div>
+          <div class=”price-strip”>
+            <span class=”was”>9,900원</span>
+            <span class=”now”>₩4,900</span>
+            <span class=”disc”>오늘만 50%↓</span>
+          </div>
+          <div class=”cta-mini-timer”>⏳ 오늘 자정 마감까지&nbsp;<span id=”miniTimer”>--:--:--</span></div>
+          <input class=”field” type=”email” id=”emailInput” placeholder=”이메일 주소 입력” oninput=”checkEmail()”>
+          <button class=”btn block” id=”submitBtn” onclick=”submitForm()” disabled style=”opacity:.4;margin-top:10px;”>반값으로 전체 리포트 받기 →</button>
+          <div class=”cta-perks”>
+            <span>✓ 무료 예약</span>
+            <span>✓ 지금 결제 없음</span>
+            <span>✓ 언제든 취소</span>
+          </div>
+          <div class=”cta-fine”>출시 시 입력하신 이메일로 가장 먼저 안내드립니다.</div>
+        </div>
       </div>
     </div>
 
@@ -1192,6 +1240,8 @@ function tick(){
     const el=document.getElementById(id);
     if(el)el.textContent=[h,m,s][idx%3];
   });
+  const mt=document.getElementById('miniTimer');
+  if(mt)mt.textContent=`${h}:${m}:${s}`;
 }
 tick();setInterval(tick,1000);
 </script>
